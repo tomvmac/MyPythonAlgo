@@ -23,6 +23,28 @@ class Student:
         else:
             print(f"{course} not found")
 
+    def find_in_file(self, filename):
+        with open(filename) as f:
+            for line in f:
+                first_name, last_name, course_details = Student.prep_record(line.strip())
+                student_read_in = Student(first_name, last_name, course_details)
+                if self == student_read_in:
+                    return True
+            return False
+
+    def add_to_file(self, filename):
+        pass
+
+    @staticmethod
+    def prep_record(line):
+        line = line.split(":")
+        first_name, last_name = line[0].split(",")
+        course_details = line[1].rstrip().split(",")
+        return first_name, last_name, course_details
+
+    def __eq__(self, other):
+        return self.first_name == other.first_name \
+        and self.last_name == other.last_name
 
     def __len__(self):
         return len(self.courses)
@@ -36,22 +58,33 @@ class Student:
                \nLast name: {self.last_name.capitalize()} \
                 \nCourses: {', '.join(map(str.capitalize, self.courses))}"
 
+# files
+file_name = "data.txt"
+
 courses1 = ['python', 'rails', 'javascript']
 courses2 = ['java', 'rails', 'c']
 
-tom = Student("tom", "Mac", courses1)
-tom.remove_course('python')
-tom.remove_course('python')
+tom = Student("tom", "mac", courses1)
+# tom.remove_course('python')
+# tom.remove_course('python')
 
-john = Student("john", "Wall", courses2)
-john.add_course('rails')
-john.add_course('javascript')
+# john = Student("john", "Wall", courses2)
+# john.add_course('rails')
+# john.add_course('javascript')
 
 # print(tom.first_name, tom.last_name, tom.courses)
 # print(john.first_name, john.last_name, john.courses)
 
-print(tom)
+# print(tom)
 # print(len(tom))
-print(repr(tom))
+# print(repr(tom))
 # print(john)
 # print(dir(tom))
+
+# find and add student
+print(tom.find_in_file(file_name))
+# print(tom.add_to_file(file_name))
+
+# joe = Student("joe", "schmo", ["python", "ruby", "javascript"])
+# print(joe.find_in_file(file_name))
+# print(joe.add_to_file(file_name))
