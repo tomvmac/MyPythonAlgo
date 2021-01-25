@@ -1,3 +1,11 @@
+# Merge Sort
+
+# Performance
+# Best Case: O(nlog(n))
+# Avg Case: O(nlog(n))
+# Worst Case: O(nlog(n))
+
+
 def merged_sorted(arr1, arr2):
     print("Merge function called with lists below:")
     print(f"left: {arr1} and right: {arr2}")
@@ -34,12 +42,14 @@ def divide_arr(arr):
         return arr[:]
     else:
         middle = len(arr) // 2
-        print("Current list to work with:", arr)
-        print("Left split:", arr[:middle])
-        print("Right split:", arr[middle:])
+        # print("Current list to work with:", arr)
+        # print("Left split:", arr[:middle])
+        # print("Right split:", arr[middle:])
         l1 = divide_arr(arr[:middle])
         l2 = divide_arr(arr[middle:])
-        # implied return home
+        # merge
+        return merged_sorted(l1, l2)
+
 
 # ---------------- Program Execution ---------------------------
 # l1 = [1,4,6,8,10]
@@ -54,4 +64,4 @@ def divide_arr(arr):
 
 
 l = [6, 8, 1, 4, 10, 7, 8, 9, 3, 2, 5]
-divide_arr(l)
+print(divide_arr(l))
