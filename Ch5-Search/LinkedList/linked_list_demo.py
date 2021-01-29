@@ -77,9 +77,8 @@ class LinkedList:
             if index == x:
                 prev.next = curr.next
 
-            if index%2 == 0 and index > 0:
+            if index > 1:
                 prev = prev.next
-                prev.next = curr
 
             curr = curr.next
             index += 1
@@ -120,7 +119,7 @@ print("4 is found at ", searchList)
 
 print("Length of my_list", my_list.length())
 
-my_list.remove_val_by_index(2)
+my_list.remove_val_by_index(3)
 print(my_list)
 
 
