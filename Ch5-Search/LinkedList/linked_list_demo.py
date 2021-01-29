@@ -56,21 +56,49 @@ class LinkedList:
 
     def search_val(self, x):
         '''return indices where x was found'''
-        pass
+        curr = self.head
+        index = 0
+        foundIndicesList = []
+        while curr is not None:
+            if curr.data == x:
+                foundIndicesList.append(index)
+            curr = curr.next
+            index += 1
+
+        return foundIndicesList
+
 
     def remove_val_by_index(self, x):
         '''remove and return value at index x provided as parameter'''
-        pass
+        curr = self.head
+        prev = self.head
+        index = 0
+        while curr is not None:
+            if index == x:
+                prev.next = curr.next
+
+            if index%2 == 0 and index > 0:
+                prev = prev.next
+                prev.next = curr
+
+            curr = curr.next
+            index += 1
 
     def length(self):
         '''return the length of the list, rep'd by the number of nodes'''
-        pass
+        curr = self.head
+        index = 0
+        foundIndicesList = []
+        while curr is not None:
+            curr = curr.next
+            index += 1
+        return index
 
     def reverse_list_recur(self, current, previous):
         '''reverse the sequence of node pointers in the linked list'''
         pass
 
-node1 = Node(1)
+node1 = Node(4)
 node2 = Node(2)
 node3 = Node(3)
 node4 = Node(4)
@@ -87,6 +115,16 @@ my_list.append_val(10)
 my_list.add_to_start(8)
 print(my_list)
 
-my_empty_list = LinkedList()
-my_empty_list.add_to_start(6)
-print(my_empty_list)
+searchList = my_list.search_val(4)
+print("4 is found at ", searchList)
+
+print("Length of my_list", my_list.length())
+
+my_list.remove_val_by_index(2)
+print(my_list)
+
+
+
+# my_empty_list = LinkedList()
+# my_empty_list.add_to_start(6)
+# print(my_empty_list)
