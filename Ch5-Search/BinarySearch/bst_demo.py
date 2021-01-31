@@ -278,5 +278,6 @@ print("Test deleting K")
 tree.in_order()
 tree.delete_val("K")
 tree.in_order()
+tree.delete_val("Z")
 
 
