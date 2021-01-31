@@ -73,6 +73,21 @@ class BSTDemo:
             print(curr.data, end=" ")
 
 
+    def find_val(self, key):
+        # O(h), O(long(n))
+        return self._find_val(self.root, key)
+
+    def _find_val(self, curr, key):
+        # check for existing of element
+        if curr:
+            if key == curr.data:
+                return "Value found in tree"
+            elif key < curr.data:
+                return self._find_val(curr.left_child, key)
+            else:
+                return self._find_val(curr.right_child, key)
+        return "Value not found in tree"
+
 # Execution Code
 
 tree = BSTDemo()
@@ -128,3 +143,12 @@ print("\n------------------------------\n")
 
 print("post order (left, right, root)\n")
 tree.post_order()
+
+print("search for E")
+print(tree.find_val("E"))
+
+print("search for J")
+print(tree.find_val("J"))
+
+print("search for Z")
+print(tree.find_val("Z"))
