@@ -88,6 +88,13 @@ class BSTDemo:
                 return self._find_val(curr.right_child, key)
         return "Value not found in tree"
 
+    def min_right_subtree(self, curr):
+        if curr.left_child == None:
+            return curr
+        else:
+            # Keep looking until found min on right child
+            return self.min_right_subtree(curr.left_child)
+
     def delete_val(self, key):
         self._delete_val(self.root, None, None, key)
 
@@ -118,13 +125,21 @@ class BSTDemo:
                 print("Found node to delete")
                 if curr.left_child and curr.right_child:
                     # both left and right child exits
-                    print("problem scenario")
+                    min_child = self.min_right_subtree(curr.right_child)
+                    # Once found, copy data
+                    curr.data = min_child.data
+                    # set parent to point to child next
+                    self._delete_val(curr.right_child, curr, False, curr.data)
+
                 elif curr.left_child == None and curr.right_child == None:
-                    # no child
-                    if is_left:
-                        prev.left_child = None
+                    if prev:
+                        # no child
+                        if is_left:
+                            prev.left_child = None
+                        else:
+                            prev.right_child = None
                     else:
-                        prev.right_child = None
+                        self.root = None
                 elif curr.left_child == None:
                     # no left child
                     if prev:
@@ -227,14 +242,41 @@ tree = BSTDemo()
 # tree.in_order()
 
 print("\n------------------------------\n")
-print("delete F\n")
-tree.insert("F")
-# left child
-tree.insert("C")
-# right child
-tree.insert("G")
+print("delete node scenarios\n")
 
+tree.insert("F")
+tree.insert("C")
+tree.insert("G")
+tree.insert("A")
+tree.insert("B")
+tree.insert("K")
+tree.insert("H")
+tree.insert("E")
+tree.insert("D")
+tree.insert("I")
+tree.insert("M")
+tree.insert("J")
+tree.insert("L")
+
+print("Test deleting C lead node which is left child of parent")
 tree.in_order()
-# tree.delete_val("C")
+tree.delete_val("C")
+tree.in_order()
+print("Test deleting G lead node which is right child of parent")
+tree.in_order()
+tree.delete_val("G")
+tree.in_order()
+print("Test deleting F parent/root node which has one child")
+tree.in_order()
 tree.delete_val("F")
 tree.in_order()
+print("Test deleting A parent/root node which has no child")
+tree.in_order()
+tree.delete_val("A")
+tree.in_order()
+print("Test deleting K")
+tree.in_order()
+tree.delete_val("K")
+tree.in_order()
+
+
