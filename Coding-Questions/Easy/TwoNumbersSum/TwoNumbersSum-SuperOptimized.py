@@ -12,13 +12,14 @@
 # array = [3, 5, -4, 8, 11, 1, -1, 6]
 # targetSum = 10
 
-# Time Complexity: o(n)
+# Time Complexity: o(n log (n))
 # Space Complexity: o(1)
 
 def twoNumberSum(arr1, targetSum):
     sumArr = []
 
     # General Solution
+    # Sort the array first
     # Iterate through 1 loop
     # Include two pointers a left and a right pointer
     # Add left and right pointer values and compare to targetSum, if less than targetSum move left point to the right
@@ -31,22 +32,26 @@ def twoNumberSum(arr1, targetSum):
     # 4. else add arr1[num1] to hash table
 
 
-    # Iterate
+    # sort the array
+    arr1.sort()
 
-    potentialMatch = 0
-    numsHash = {}
+    # init left and right pointers
+    left = 0
+    right = len(arr1) - 1
 
-    for num1 in range(len(arr1)):
-        potentialMatch = targetSum - arr1[num1]
-        if potentialMatch in numsHash:
-            # add arr1[num1] and potentialMatch to sumArr and return
-            sumArr.append(arr1[num1])
-            sumArr.append(potentialMatch)
+    while left < right:
+        currentSum = arr1[left] + arr1[right]
+        if currentSum == targetSum:
+            sumArr.append(arr1[left])
+            sumArr.append(arr1[right])
             return sumArr
-        else:
-            # add arr1[num1] to numsHash
-            numsHash[arr1[num1]] = True
+        elif currentSum < targetSum:
+            left += 1
+        elif currentSum > targetSum:
+            right -= 1
     return sumArr
+
+
 
 
 arr1 = [3, 5, -4, 8, 11, 1, -1, 6]
