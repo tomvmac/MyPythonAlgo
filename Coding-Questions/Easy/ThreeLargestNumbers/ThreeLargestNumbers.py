@@ -29,36 +29,43 @@ def shiftLeft(array, index, numToAdd):
 
 def findThreeLargestNumbers(array):
     threeLargestNums = [None, None, None]
+    itemInserted = False
 
     # iterate through array
     for i in range(len(array)):
         # insert into appropriate slot in threeLargestNums and shift
         # process last position
-        if threeLargestNums[2] == None:
-            threeLargestNums[2] = array[i]
-            continue
-        else:
-            if array[i] >= threeLargestNums[2]:
-                threeLargestNums = shiftLeft(threeLargestNums, 2, array[i])
-                continue
+        itemInserted = False
+
+        # process last position
+        if itemInserted == False:
+            if threeLargestNums[2] == None or array[i] >= threeLargestNums[2]:
+                if threeLargestNums[2] == None:
+                    threeLargestNums[2] = array[i]
+                else:
+                    if array[i] >= threeLargestNums[2]:
+                        threeLargestNums = shiftLeft(threeLargestNums, 2, array[i])
+                itemInserted = True
+
         # process middle position
-        if threeLargestNums[1] == None:
-            threeLargestNums[1] = array[i]
-            continue
-        else:
-            if array[i] >= threeLargestNums[1]:
-                # shift left
-                threeLargestNums = shiftLeft(threeLargestNums, 1, array[i])
-                continue
+        if itemInserted == False:
+            if threeLargestNums[1] == None or array[i] >= threeLargestNums[1]:
+                if threeLargestNums[1] == None:
+                    threeLargestNums[1] = array[i]
+                else:
+                    if array[i] >= threeLargestNums[1]:
+                        threeLargestNums = shiftLeft(threeLargestNums, 1, array[i])
+                itemInserted = True
+
         # process first position
-        if threeLargestNums[0] == None:
-            threeLargestNums[0] = array[i]
-            continue
-        else:
-            if array[i] >= threeLargestNums[0]:
-                # shift left
-                threeLargestNums = shiftLeft(threeLargestNums, 0, array[i])
-                continue
+        if itemInserted == False:
+            if threeLargestNums[0] == None or array[i] >= threeLargestNums[1]:
+                if threeLargestNums[0] == None:
+                    threeLargestNums[0] = array[i]
+                else:
+                    if array[i] >= threeLargestNums[0]:
+                        threeLargestNums = shiftLeft(threeLargestNums, 0, array[i])
+                itemInserted = True
 
     return threeLargestNums
 
