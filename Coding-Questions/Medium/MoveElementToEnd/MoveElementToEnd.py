@@ -6,30 +6,40 @@
 
 
 # General Strategy
-# 1. Iterate through array
-# 2. Compare each item with number to move
-# 3. If equals, assign last element of array to current item
+# 1. Iterate through array using a while loop with two pointers, one at the beginning and one (head) and the end (tail)
+# 2. head increments every time
+# 3. tail decrements only when it is equal to toMove
+# 4. if head == toMove and does not equal to tail, swap head with tail
 
 
 # Time: O(n)
 # Space: O(1)
 
 def moveElementToEnd(array, toMove):
-    for index in range(len(array)):
-        if array[index] == toMove:
-            # shift
-            for num in range(index, len(array)-1):
-                if array[num] != toMove and array[num+1] != toMove:
-                    array[num] = array[num+1]
-            # assign last
-            array[len(array)-1] = toMove
+    temp = 0
+    head = 0
+    tail = len(array)-1
+
+    while head < tail:
+        while head < tail and array[tail] == toMove:
+            # decrement tail
+            tail -= 1
+        if array[head] == toMove:
+            # swap
+            temp = array[tail]
+            array[tail] = array[head]
+            array[head] = temp
+        # increment head
+        head += 1
+
     return array
 
 
 
 # Driver Code
 
-array = [2, 1, 2, 2, 2, 3, 4, 2]
+# array = [2, 1, 2, 2, 2, 3, 4, 2]
+array = [2, 4, 2,5,6,2,2]
 toMove = 2
 
 print(moveElementToEnd(array, toMove))
