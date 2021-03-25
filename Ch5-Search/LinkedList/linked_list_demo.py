@@ -95,7 +95,21 @@ class LinkedList:
 
     def reverse_list_recur(self, current, previous):
         '''reverse the sequence of node pointers in the linked list'''
-        pass
+        # Given [1->2->3->4->5] reverse pointers [5->4->3->2->1]
+
+        # Empty list
+        if self.head == None:
+            return
+        elif current.next == None:
+            # Base case is when we have reached the end of the list
+            self.tail = self.head
+            current.next = previous.next
+            self.head = current
+        else:
+            next = current.next
+            current.next = previous
+            self.reverse_list_recur(next, current)
+
 
 node1 = Node(4)
 node2 = Node(2)
@@ -105,21 +119,30 @@ node5 = Node(5)
 # print(node1)
 
 my_list = LinkedList()
-my_list.append_val(node1)
-my_list.append_val(node2)
-my_list.append_val(node3)
-my_list.append_val(node4)
-my_list.append_val(node5)
-my_list.append_val(10)
-my_list.add_to_start(8)
+# my_list.append_val(node1)
+# my_list.append_val(node2)
+# my_list.append_val(node3)
+# my_list.append_val(node4)
+# my_list.append_val(node5)
+# my_list.append_val(10)
+# my_list.add_to_start(8)
+# print(my_list)
+
+# searchList = my_list.search_val(4)
+# print("4 is found at ", searchList)
+#
+# print("Length of my_list", my_list.length())
+
+my_list.append_val(1)
+my_list.append_val(2)
+my_list.append_val(3)
+my_list.append_val(4)
+my_list.append_val(5)
+#
+# my_list.remove_val_by_index(3)
 print(my_list)
 
-searchList = my_list.search_val(4)
-print("4 is found at ", searchList)
-
-print("Length of my_list", my_list.length())
-
-my_list.remove_val_by_index(3)
+my_list.reverse_list_recur(my_list.head, None)
 print(my_list)
 
 
