@@ -26,26 +26,17 @@ class BST:
 
 
 def validateBst(tree):
-    isValid = True
+    return validateBstHelper(tree, float("-inf"), float("inf"))
 
-    if tree:
-        # check left is < root
-        if tree.left != None:
-            if tree.left.value >= tree.value:
-                isValid = False
-        elif tree.right != None:
-            if tree.right.value < tree.value:
-                # check right is >= root
-                isValid = False
 
-        if isValid:
-            # recursively traverse left
-            isValid = validateBst(tree.left)
-            if isValid:
-                # recursively traverse right
-                isValid = validateBst(tree.right)
+def validateBstHelper(tree, minValue, maxValue):
+    if tree is None:
+        return True
+    if tree.value < minValue or tree.value >= maxValue:
+        return False
+    leftIsValid = validateBstHelper(tree.left, minValue, tree.value)
+    return leftIsValid and validateBstHelper(tree.right, tree.value, maxValue)
 
-    return isValid
 
 # Driver Code
 # root = BST(10)
@@ -58,14 +49,22 @@ def validateBst(tree):
 # root.right.left.right = BST(14)
 # root.right.right = BST(22)
 
+# root = BST(10)
+# root.left = BST(5)
+# root.left.left = BST(2)
+# root.left.left.left = BST(1)
+# root.left.right = BST(5)
+# root.left.right.right = BST(11)
+# root.right = BST(15)
+# root.right.right = BST(22)
+
 root = BST(10)
 root.left = BST(5)
 root.left.left = BST(2)
 root.left.left.left = BST(1)
-root.left.right = BST(5)
+root.left.right = BST(3)
 root.left.right.right = BST(11)
 root.right = BST(15)
 root.right.right = BST(22)
-
 
 print(validateBst(root))
