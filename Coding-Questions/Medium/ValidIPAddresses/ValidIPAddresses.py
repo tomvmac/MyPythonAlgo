@@ -35,15 +35,15 @@ def validIPAddresses(string):
         # Second Period
         for j in range(i + 1, i + min(len(string) - i, 4)):
             currentIPAddressParts[1] = string[i:j]
-        if not isValidPart(currentIPAddressParts[1]):
-            continue
+            if not isValidPart(currentIPAddressParts[1]):
+                continue
 
-        for k in range(j + 1, j + min(len(string) - j, 4)):
-            currentIPAddressParts[2] = string[j:k]
-        currentIPAddressParts[3] = string[k:]
+            for k in range(j + 1, j + min(len(string) - j, 4)):
+                currentIPAddressParts[2] = string[j:k]
+                currentIPAddressParts[3] = string[k:]
 
-        if isValidPart(currentIPAddressParts[2]) and isValidPart(currentIPAddressParts[3]):
-            ipAddressesFound.append(".".join(currentIPAddressParts))
+                if isValidPart(currentIPAddressParts[2]) and isValidPart(currentIPAddressParts[3]):
+                    ipAddressesFound.append(".".join(currentIPAddressParts))
 
     return ipAddressesFound
 
